@@ -25,7 +25,8 @@ VAE 특징 벡터 추출 테스트
 1) 폴더 구조
     - 프로젝트 루트
         - dataset/
-        - models/
+        - model/
+        - output/
         - src/
     - 프로젝트 하위 폴더 생성
         ```

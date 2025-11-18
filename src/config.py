@@ -8,5 +8,6 @@ model_path = f"{project_dir}/model/vae_celebA/vae_celeba_latent_200_epochs_10_ba
 celebA_path = f"{project_dir}/dataset/celebA"
 celebA_image_path = f"{celebA_path}/img_align_celeba/img_align_celeba"
 celebA_attr_path = f"{celebA_path}/list_attr_celeba.csv"
+output_path = f"{project_dir}/output"
 
 scale = 3

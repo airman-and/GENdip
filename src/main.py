@@ -20,7 +20,8 @@ def main():
         return
     celeba_loader = get_celeba_loader(
         celebA_image_path = config.celebA_image_path,
-        celebA_attr_path = config.celebA_attr_path
+        celebA_attr_path = config.celebA_attr_path,
+        shuffle=True
     )
 
 

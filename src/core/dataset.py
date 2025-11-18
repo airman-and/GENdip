@@ -60,6 +60,7 @@ def get_celeba_loader(
         image_size=64,
         filter_attr=None, 
         filter_value=None,
+        shuffle=False,
         max_samples=None
     ):
     transform = transforms.Compose([
@@ -79,8 +80,8 @@ def get_celeba_loader(
     dataloader = DataLoader(
         dataset,
         batch_size=batch_size,
-        shuffle=False,
-        num_workers=4,
+        shuffle=shuffle,
+        num_workers=8,
         pin_memory=True
     )
     
