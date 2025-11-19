@@ -12,6 +12,8 @@ def main():
         return
     model = get_vae_model(
         model_path = config.model_path, 
+        model_latent_dim = config.model_latent_dim,
+        image_size = config.image_size,
         device = 'cuda' if torch.cuda.is_available() else 'cpu'
     )
 
@@ -21,7 +23,9 @@ def main():
     celeba_loader = get_celeba_loader(
         celebA_image_path = config.celebA_image_path,
         celebA_attr_path = config.celebA_attr_path,
-        shuffle=True
+        batch_size=config.batch_size,
+        image_size=config.image_size,
+        shuffle=config.shuffle
     )
 
 

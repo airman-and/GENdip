@@ -13,7 +13,7 @@ VAE 특징 벡터 추출 테스트
 
 # 모델
 
-- VAE-CelebA: https://huggingface.co/hussamalafandi/VAE-CelebA
+- CelebA를 학습한 VAE
 
 # 데이터셋
 
@@ -21,8 +21,9 @@ VAE 특징 벡터 추출 테스트
 
 # 셋업
 
-모델(VAE-CelebA)과 데이터(celebA)를 로컬로 내려받아야 합니다. (macOS)
-1) 폴더 구조
+모델(VAE-CelebA)과 데이터(celebA)를 로컬로 내려받아야 합니다. (macOS)  
+
+- 폴더 구조
     - 프로젝트 루트
         - dataset/
         - model/
@@ -31,21 +32,9 @@ VAE 특징 벡터 추출 테스트
     - 프로젝트 하위 폴더 생성
         ```
         cd /(프로젝트 위치)/GenDL-LatentControl
-        mkdir model
         mkdir dataset
         ```
-2) Hugging Face에서 모델 받기
-    - Git LFS 설치 및 초기화:  
-        ```
-        brew install git-lfs
-        git lfs install
-        ```
-    - 모델 클론:  
-        ```
-        cd /(프로젝트 위치)/GenDL-LatentControl/model
-        git clone https://huggingface.co/hussamalafandi/VAE-CelebA vae-celeba
-        ```
-3) Kaggle에서 CelebA 데이터 받기
+- Kaggle에서 CelebA 데이터 받기
     - Kaggle CLI 설치 및 인증:
         ```
         pip3 install kaggle
