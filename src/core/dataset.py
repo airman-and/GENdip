@@ -13,7 +13,8 @@ class CelebADataset(Dataset):
             transform=None, 
             filter_attr=None, 
             filter_value=None, 
-            max_samples=None
+            max_samples=None,
+            image_ids=None
         ):
         self.celebA_image_path = celebA_image_path
         self.celebA_attr_path = celebA_attr_path
@@ -25,20 +26,23 @@ class CelebADataset(Dataset):
         self.attr_df = None
         self.image_list = None
         
-        self.attr_df = pd.read_csv(celebA_attr_path)
-        if 'image_id' not in self.attr_df.columns and len(self.attr_df.columns) > 0:
-            self.attr_df.columns = ['image_id'] + list(self.attr_df.columns[1:])
-        
-        if filter_attr and filter_attr in self.attr_df.columns:
-            if filter_value is not None:
-                filtered = self.attr_df[self.attr_df[filter_attr] == filter_value]
-            else:
-                filtered = self.attr_df
-            self.image_list = filtered['image_id'].tolist()
+        if image_ids is not None:
+            self.image_list = image_ids
         else:
-            self.image_list = self.attr_df['image_id'].tolist()
+            self.attr_df = pd.read_csv(celebA_attr_path)
+            if 'image_id' not in self.attr_df.columns and len(self.attr_df.columns) > 0:
+                self.attr_df.columns = ['image_id'] + list(self.attr_df.columns[1:])
+            
+            if filter_attr and filter_attr in self.attr_df.columns:
+                if filter_value is not None:
+                    filtered = self.attr_df[self.attr_df[filter_attr] == filter_value]
+                else:
+                    filtered = self.attr_df
+                self.image_list = filtered['image_id'].tolist()
+            else:
+                self.image_list = self.attr_df['image_id'].tolist()
 
-        if self.max_samples:
+        if self.max_samples and len(self.image_list) > self.max_samples:
             self.image_list = self.image_list[:self.max_samples]
         
         print(f"[Dataset] CelebADataset __init__ success ({len(self.image_list)})")

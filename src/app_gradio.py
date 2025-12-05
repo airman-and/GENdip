@@ -51,6 +51,13 @@ def load_resources():
             # Normalize
             vectors[name] = vectors[name] / torch.norm(vectors[name])
             
+    # Load Balanced Vector if exists
+    balanced_path = os.path.join(vector_dir, "vector_Eyeglasses_balanced.npy")
+    if os.path.exists(balanced_path):
+        name = "Eyeglasses (Debiased)"
+        vectors[name] = torch.from_numpy(np.load(balanced_path)).to(device)
+        vectors[name] = vectors[name] / torch.norm(vectors[name])
+            
     # Init seed if not set
     if current_w is None:
         update_seed(42)
@@ -158,7 +165,7 @@ with gr.Blocks() as demo:
             sliders = []
             
             # 1. Main Attributes (Top 5)
-            main_attrs = ['Smiling', 'Male', 'Young', 'Eyeglasses', 'Blond_Hair']
+            main_attrs = ['Smiling', 'Male', 'Young', 'Eyeglasses', 'Eyeglasses (Debiased)', 'Blond_Hair']
             
             gr.Markdown("### ✨ Key Attributes")
             for name in main_attrs:
