@@ -30,7 +30,10 @@ class CelebADataset(Dataset):
             self.attr_df.columns = ['image_id'] + list(self.attr_df.columns[1:])
         
         if filter_attr and filter_attr in self.attr_df.columns:
-            filtered = self.attr_df[self.attr_df[filter_attr] == 1 if filter_value == 1 else -1]
+            if filter_value is not None:
+                filtered = self.attr_df[self.attr_df[filter_attr] == filter_value]
+            else:
+                filtered = self.attr_df
             self.image_list = filtered['image_id'].tolist()
         else:
             self.image_list = self.attr_df['image_id'].tolist()
@@ -64,6 +67,7 @@ def get_celeba_loader(
         max_samples=None
     ):
     transform = transforms.Compose([
+        transforms.CenterCrop(178),
         transforms.Resize((image_size, image_size)),
         transforms.ToTensor(),
     ])

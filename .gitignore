@@ -80,3 +80,10 @@ coverage.xml
 
 ### Project ###
 dataset/
+checkpoints/
+output/
+__pycache__/
+*.pkl
+*.pt
+*.pth
+*.npy
